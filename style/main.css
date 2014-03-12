@@ -439,21 +439,24 @@ hr {
   -moz-animation-fill-mode: both; }
 
 .game-intro {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  text-align: center;
+
+}
 
 .game-explanation {
   margin-top: 50px; }
 
 @media screen and (max-width: 480px) {
   html, body {
-    font-size: 15px; }
+    font-size: 13px; }
 
   body {
     margin: 20px 0;
     padding: 0 20px; }
 
   h1.title {
-    font-size: 50px; }
+    font-size: 40px; }
 
   .container {
     width: 280px;
@@ -612,6 +615,17 @@ hr {
 
   .tile {
     font-size: 35px; }
+
+  .go-back {
+    font-size: 35px;
+    text-align: center;
+    padding: 20px;
+    background: #776E65;
+    color: #FAF8EF;
+    display: block;
+    text-decoration: none;
+
+  }
 
   .game-message p {
     font-size: 30px !important;

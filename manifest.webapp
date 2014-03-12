@@ -1,4 +1,18 @@
 {
 	"name": "2048",
-	"description": "Port to Firefox OS of the popular 2048 game by Gabriele Cirulli. "
+	"description": "Port to Firefox OS of the popular 2048 game by Gabriele Cirulli. Swipe on the screen on the direction you want to move the tiles. When two tiles with the same number touch, they merge into one. Try to reach the 2048 tile!",
+	"launch_path": "/index.html",
+	"icons": {
+		"90": "/img/logo-90.png",
+		"128": "/img/logo-128.png",
+		"32": "/img/logo-32.png",
+		"60": "/img/logo-60.png",
+		"120": "/img/logo-120.png"
+	},
+	"developer":
+		{
+			"name": "Andre Alves Garzia",
+			"url": "http://andregarzia.com"
+		},
+	"orientation": ["portrait"]
 }

@@ -56,22 +56,57 @@ KeyboardInputManager.prototype.listen = function () {
   var retry = document.getElementsByClassName("retry-button")[0];
   retry.addEventListener("click", this.restart.bind(this));
 
-  // Listen to swipe events
-  var gestures = [Hammer.DIRECTION_UP, Hammer.DIRECTION_RIGHT,
-                  Hammer.DIRECTION_DOWN, Hammer.DIRECTION_LEFT];
 
-  var gameContainer = document.getElementsByClassName("game-container")[0];
-  var handler       = Hammer(gameContainer, {
-    drag_block_horizontal: true,
-    drag_block_vertical: true
-  });
-  
-  handler.on("swipe", function (event) {
-    event.gesture.preventDefault();
-    mapped = gestures.indexOf(event.gesture.direction);
+  /*
+  Begin implementation for touch events
 
-    if (mapped !== -1) self.emit("move", mapped);
+  PS: The original implementation using hammer was not working on Firefox OS.
+
+  */
+
+  var touch_start_x, touch_start_y; // used to compute touch movement deltas;
+  var gameContainer = document.querySelector(".game-container");
+
+  // Constants for movement function
+  var MOVE_UP = 0;
+  var MOVE_DOWN = 2;
+  var MOVE_LEFT = 3;
+  var MOVE_RIGHT = 1;
+
+  gameContainer.addEventListener("touchstart", function(event) {
+
+    touch_start_x = event.touches[0].screenX;
+    touch_start_y = event.touches[0].screenY;
+
   });
+
+  gameContainer.addEventListener("touchend", function(event) {
+
+    var delta_x = event.changedTouches[0].screenX - touch_start_x;
+    var delta_y = event.changedTouches[0].screenY - touch_start_y;
+
+    if (Math.abs(delta_x) > Math.abs(delta_y)) {
+
+      if (delta_x > 0) {
+        self.emit("move", MOVE_RIGHT);
+      } else {
+        self.emit("move", MOVE_LEFT);
+      }
+
+    } else {
+
+
+      if (delta_y > 0) {
+        self.emit("move", MOVE_DOWN);
+      } else {
+        self.emit("move", MOVE_UP);
+      }
+    }
+
+  });
+
+  /* end of touch events implementation */
+
 };
 
 KeyboardInputManager.prototype.restart = function (event) {
