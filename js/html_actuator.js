@@ -120,15 +120,15 @@ HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "You win!" : "Game over!";
 
-  var bestScore = localStorage.getItem("bestScore");
 
-  if (!bestScore) {
+  if (!this.bestScore) {
       console.log("Best score not set!")
-      bestScore = 0;
+      this.bestScore = 0;
   }
 
-  if (this.score > bestScore) {
-      localStorage.setItem("bestScore", this.score);
+  if (this.score > this.bestScore) {
+      localStorage.setItem("bestScore", this.bestScore);
+      this.bestScore = this.score;
   }
 
 
@@ -142,4 +142,5 @@ HTMLActuator.prototype.message = function (won) {
 HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
+  this.bestScoreContainer.textContent = this.bestScore;
 };
