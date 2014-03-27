@@ -46,6 +46,10 @@ h1.title {
   float: left;
 }
 
+.hidden {
+  display: none;
+}
+
 @include keyframes(move-up) {
   0% {
     top: 25px;

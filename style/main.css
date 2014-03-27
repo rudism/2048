@@ -22,6 +22,9 @@ h1.title {
   display: block;
   float: left; }
 
+.hidden {
+  display: none; }
+
 @-webkit-keyframes move-up {
   0% {
     top: 25px;

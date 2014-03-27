@@ -3,8 +3,19 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector("#current-score");
   this.bestScoreContainer = document.querySelector("#best-score");
   this.messageContainer = document.getElementsByClassName("game-message")[0];
+  this.titleContainer = document.querySelector(".title");
 
   this.score = 0;
+
+  this.bestScore = localStorage.getItem("bestScore");
+
+  if (this.bestScore === null) {
+      this.bestScore = 0;
+  }
+
+  this.bestScoreContainer.textContent = this.bestScore;
+
+
 }
 
 HTMLActuator.prototype.actuate = function (grid, metadata) {
@@ -88,14 +99,6 @@ HTMLActuator.prototype.positionClass = function (position) {
 };
 
 HTMLActuator.prototype.updateScore = function (score) {
-  var bestScore;
-
-  bestScore = localStorage.getItem("bestScore");
-
-  if (!bestScore) {
-      bestScore = 0;
-  }
-
 
   this.clearContainer(this.scoreContainer);
 
@@ -103,7 +106,6 @@ HTMLActuator.prototype.updateScore = function (score) {
   this.score = score;
 
   this.scoreContainer.textContent = this.score;
-  this.bestScoreContainer.textContent = bestScore;
 
   if (difference > 0) {
     var addition = document.createElement("div");
